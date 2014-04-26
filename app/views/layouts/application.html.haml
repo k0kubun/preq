@@ -15,6 +15,9 @@
             Pull Req Viewer
           %ul.nav.pull-right
             %li
-              = link_to 'Login', '#', class: 'login'
+              - if @login_user.present?
+                = link_to 'Logout', sessions_path, class: 'login', method: :delete
+              - else
+                = link_to 'Login', new_session_path, class: 'login'
     .container
       = yield
