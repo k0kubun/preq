@@ -1,5 +1,7 @@
 class SessionsController < ApplicationController
   GITHUB_URL = 'https://github.com'
+  GITHUB_AUTHORIZE_PATH = '/login/oauth/authorize'
+  GITHUB_TOKEN_PATH = '/login/oauth/access_token'
 
   def new
     redirect_to oauth2_client.auth_code.authorize_url(redirect_uri: sessions_url)
@@ -32,8 +34,8 @@ class SessionsController < ApplicationController
       ENV['GITHUB_CLIENT_ID'],
       ENV['GITHUB_CLIENT_SECRET'],
       site: GITHUB_URL,
-      authorize_url: '/login/oauth/authorize',
-      token_url: '/login/oauth/access_token',
+      authorize_url: GITHUB_AUTHORIZE_PATH,
+      token_url: GITHUB_TOKEN_PATH,
     )
   end
 end
