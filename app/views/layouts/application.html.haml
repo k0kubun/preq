@@ -7,4 +7,13 @@
     = javascript_include_tag 'application'
     = csrf_meta_tags
   %body
-    = yield
+    .navbar.navbar-fixed-top
+      .navbar-inner
+        .container
+          = link_to root_path, class: 'brand' do
+            Pull Req Viewer
+          %ul.nav.pull-right
+            %li
+              = link_to 'Login', '#', class: 'login'
+    .container
+      = yield
