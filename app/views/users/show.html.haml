@@ -21,6 +21,12 @@
         %span.badge{ class: "badge-#{badge_by_tab[tab]}" }
           0
 
+- view_type_by_tab = { merged: :pullreq, open: :pullreq, closed: :pullreq, contributed: :repo }
 - tabs.each_with_index do |tab, index|
   .tab_content{ id: tab, class: ('active' if index == 0) }
     #{tab}
+    - case view_type_by_tab[tab]
+    - when :pullreq
+      = render 'pull_requests'
+    - when :repo
+      = render 'repositories'

@@ -1,0 +1,18 @@
+%table.table.table-bordered
+  %thead
+    %tr
+      %th
+        Star
+      %th
+        Name
+
+  %tbody
+    - [].each do |repo|
+      %tr
+        %td
+          star
+        %td
+          = link_to '#' do
+            #{'repo'}/
+            %strong
+              = 'name'

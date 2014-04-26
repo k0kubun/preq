@@ -1,0 +1,21 @@
+%table.table.table-bordered
+  %thead
+    %tr
+      %th
+        Repository
+      %th
+        Title
+
+  %tbody
+    - [].each do |pr|
+      %tr
+        %td
+          = link_to '#' do
+            #{'owner'}/
+            %strong
+              = 'name'
+        %td
+          = link_to '#' do
+            = 'title'
+          %span.pull-right
+            = "##{'number'}"
