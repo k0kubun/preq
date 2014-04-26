@@ -8,5 +8,6 @@ class ApplicationController < ActionController::Base
   def set_login_user
     return if session[:login].blank?
     @login_user ||= User.find_by_login(session[:login])
+    reset_session if @login_user.blank?
   end
 end

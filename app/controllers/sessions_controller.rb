@@ -21,9 +21,9 @@ class SessionsController < ApplicationController
   private
 
   def authorize(access_token)
-    github_user = Octokit::Client.new(access_token: access_token).user
+    github_user = User.new(access_token: access_token).github_client.user
     @login_user = User.where(login: github_user.login).first_or_create
-    @login_user.update(access_token: access_token)
+    @login_user.update(access_token: access_token, avatar_url: github_user.avatar_url)
     session[:login] = @login_user.login
   end
 

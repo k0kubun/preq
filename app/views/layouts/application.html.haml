@@ -16,7 +16,9 @@
           %ul.nav.pull-right
             %li
               - if @login_user.present?
-                = link_to 'Logout', sessions_path, class: 'login', method: :delete
+                = link_to sessions_path, class: 'login', method: :delete do
+                  = image_tag @login_user.avatar_url, class: 'avatar'
+                  Logout
               - else
                 = link_to 'Login', new_session_path, class: 'login'
     .container
