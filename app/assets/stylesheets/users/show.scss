@@ -1,0 +1,11 @@
+.user_header {
+	margin-bottom: 30px;
+}
+
+.tab_content {
+	display: none;
+
+	&.active {
+		display: block;
+	}
+}

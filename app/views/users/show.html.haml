@@ -1,5 +1,26 @@
-%h1
-  #{params[:id]}'s Pull Requests
+- content_for :css do
+  = stylesheet_link_tag 'users/show'
+- content_for :js do
+  = javascript_include_tag 'users/show'
 
-- if @login_user
-  = link_to 'Refresh Data', user_path(params[:id]), class: 'btn', method: :patch
+.user_header
+  %h1
+    #{params[:id]}'s Pull Requests
+
+  - if @login_user
+    = link_to 'Refresh Data', user_path(params[:id]), class: 'btn', method: :patch
+
+- tabs = [:merged, :open, :closed, :contributed]
+
+%ul.nav.nav-tabs
+  - badge_by_tab = { merged: :success, open: :warning, closed: :important, contributed: :info }
+  - tabs.each_with_index do |tab, index|
+    %li{ class: ('active' if index == 0) }
+      = link_to "##{tab}", class: 'tab_change' do
+        #{tab.capitalize}
+        %span.badge{ class: "badge-#{badge_by_tab[tab]}" }
+          0
+
+- tabs.each_with_index do |tab, index|
+  .tab_content{ id: tab, class: ('active' if index == 0) }
+    #{tab}
