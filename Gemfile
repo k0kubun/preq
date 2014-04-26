@@ -18,3 +18,5 @@ group :development, :test do
   gem 'pry-rails'
 end
 
+gem 'omniauth', '~> 1.2.1'
+gem 'omniauth-github', '~> 1.1.2'
