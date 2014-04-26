@@ -1,1 +1,14 @@
-index
+- content_for :css do
+  = stylesheet_link_tag 'pages/index'
+
+.hero-unit
+  .row
+    %h1
+      Pull Req Viewer
+    %p
+      Show the pull requests that your favorite users created.
+      %br
+      You'll see how many merged pull requests they have
+      and what kind of projects they've contributed to.
+
+    = link_to 'Sign in with Github', '#'
