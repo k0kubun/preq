@@ -1,1 +1,5 @@
-test
+%h1
+  #{params[:id]}'s Pull Requests
+
+- if @login_user
+  = link_to 'Refresh Data', user_path(params[:id]), class: 'btn', method: :patch
