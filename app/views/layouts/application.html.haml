@@ -6,6 +6,7 @@
     = stylesheet_link_tag 'application', media: 'all'
     = content_for :css
     = javascript_include_tag 'application'
+    = javascript_include_tag 'search_user'
     = csrf_meta_tags
   %body
     .navbar.navbar-fixed-top
@@ -13,6 +14,8 @@
         .container
           = link_to root_path, class: 'brand' do
             Pull Req Viewer
+          %form.navbar-search
+            = text_field :user, :login, class: 'search-query', placeholder: 'username'
           %ul.nav.pull-right
             %li
               - if @login_user.present?
