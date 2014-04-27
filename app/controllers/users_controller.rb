@@ -14,8 +14,10 @@ class UsersController < ApplicationController
   private
 
   def load_repositories
-    github_repositories = @login_user.github_client.repositories(@user.login)
+    github_repositories = @login_user.github_client.repositories(@user.login, with_parent: true)
     github_repositories.each do |github_repository|
+      github_repository = github_repository.parent || github_repository
+
       repository = Repository.where(
         user_id: @user.id,
         name: github_repository.name,

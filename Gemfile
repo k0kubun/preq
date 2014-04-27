@@ -19,5 +19,5 @@ group :development, :test do
 end
 
 gem 'oauth2', '~> 0.9.3'
-gem 'octokit', '~> 3.1.0'
+gem 'octokit', git: 'git://github.com/k0kubun/octokit.rb.git', branch: 'repositories_with_parent'
 gem 'dotenv-rails', '~> 0.11.1'
