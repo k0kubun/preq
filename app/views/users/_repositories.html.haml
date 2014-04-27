@@ -7,12 +7,12 @@
         Name
 
   %tbody
-    - [].each do |repo|
+    - repositories.each do |repository|
       %tr
         %td
-          star
+          = repository.stargazers_count
         %td
           = link_to '#' do
-            #{'repo'}/
-            %strong
-              = 'name'
+            #{repository.owner}/
+            %strong><
+              = repository.name

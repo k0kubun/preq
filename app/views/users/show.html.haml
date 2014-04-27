@@ -12,21 +12,30 @@
 
 - tabs = [:merged, :open, :closed, :contributed]
 
-%ul.nav.nav-tabs
-  - badge_by_tab = { merged: :success, open: :warning, closed: :important, contributed: :info }
-  - tabs.each_with_index do |tab, index|
-    %li{ class: ('active' if index == 0) }
-      = link_to "##{tab}", class: 'tab_change' do
-        #{tab.capitalize}
-        %span.badge{ class: "badge-#{badge_by_tab[tab]}" }
-          0
+- if @user.present?
+  %ul.nav.nav-tabs
+    - badge_by_tab = { merged: :success, open: :warning, closed: :important, contributed: :info }
+    - tabs.each_with_index do |tab, index|
+      %li{ class: ('active' if index == 0) }
+        = link_to "##{tab}", class: 'tab_change' do
+          #{tab.capitalize}
+          %span.badge{ class: "badge-#{badge_by_tab[tab]}" }
+            0
 
-- view_type_by_tab = { merged: :pullreq, open: :pullreq, closed: :pullreq, contributed: :repo }
-- tabs.each_with_index do |tab, index|
-  .tab_content{ id: tab, class: ('active' if index == 0) }
-    #{tab}
-    - case view_type_by_tab[tab]
-    - when :pullreq
-      = render 'pull_requests'
-    - when :repo
-      = render 'repositories'
+  - view_type_by_tab = { merged: :pullreq, open: :pullreq, closed: :pullreq, contributed: :repo }
+  - tabs.each_with_index do |tab, index|
+    .tab_content{ id: tab, class: ('active' if index == 0) }
+      - case view_type_by_tab[tab]
+      - when :pullreq
+        = render 'pull_requests'
+      - when :repo
+        = render 'repositories', repositories: @user.send(tab)
+
+- else
+  %p
+    This user's data is not fetched yet.
+  %p
+    Please
+    = link_to new_session_path do
+      sign in
+    to load his data from Github.
