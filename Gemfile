@@ -21,3 +21,4 @@ end
 gem 'oauth2', '~> 0.9.3'
 gem 'octokit', git: 'git://github.com/k0kubun/octokit.rb.git', branch: 'repositories_with_parent'
 gem 'dotenv-rails', '~> 0.11.1'
+gem 'silencer', '~> 0.6.0'
