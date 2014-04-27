@@ -1,7 +1,8 @@
 # Pull Req Viewer
 
 Another implementation of [pr_viewer](https://github.com/k0kubun/pr_viewer), which is a web application to see pull requests.  
-pr_viewer is written by Go, preq is written by Ruby.
+pr_viewer is written by Go, preq is written by Ruby.  
+This version is not performance-tuned for sql equivalence with pr_viewer.
 
 ## Run
 
