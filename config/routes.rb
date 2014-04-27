@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  resources :users, only: [:show, :update]
+  resources :users, param: :login, only: [:show, :update]
   resources :sessions, only: [:new] do
     collection do
       get :create

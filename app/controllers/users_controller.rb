@@ -2,11 +2,11 @@ class UsersController < ApplicationController
   before_action :login_required, only: [:update]
 
   def show
-    @user = User.find_by_login(params[:id])
+    @user = User.find_by_login(params[:login])
   end
 
   def update
-    @user = User.where(login: params[:id]).first_or_create
+    @user = User.where(login: params[:login]).first_or_create
     load_repositories
     load_pull_requests
     redirect_to user_path(@user)

@@ -5,10 +5,10 @@
 
 .user_header
   %h1
-    #{params[:id]}'s Pull Requests
+    #{params[:login]}'s Pull Requests
 
   - if @login_user
-    = link_to 'Refresh Data', user_path(params[:id]), class: 'btn', method: :patch
+    = link_to 'Refresh Data', user_path(params[:login]), class: 'btn', method: :patch
 
 - tabs = [:merged, :open, :closed, :contributed]
 
