@@ -8,6 +8,7 @@ class UsersController < ApplicationController
   def update
     @user = User.where(login: params[:id]).first_or_create
     load_repositories
+    load_pull_requests
     redirect_to user_path(@user)
   end
 
@@ -28,6 +29,34 @@ class UsersController < ApplicationController
         url: github_repository.html_url,
         stargazers_count: github_repository.stargazers_count,
       )
+    end
+  end
+
+  def load_pull_requests
+    @user.repositories.each do |repository|
+      open_pull_requests = @login_user.github_client.pull_requests(repository.full_name, state: 'open')
+      closed_pull_requests = @login_user.github_client.pull_requests(repository.full_name, state: 'closed')
+
+      (open_pull_requests + closed_pull_requests).each do |github_pull_request|
+        pull_request = PullRequest.where(
+          repository_id: repository.id,
+          number: github_pull_request.number,
+        ).first_or_create
+
+        pull_request.update(
+          state: merged_including_state(github_pull_request),
+          title: github_pull_request.title,
+          url: github_pull_request.html_url,
+        )
+      end
+    end
+  end
+
+  def merged_including_state(github_pull_request)
+    if github_pull_request.state == 'closed' && github_pull_request.merged_at.present?
+      'merged'
+    else
+      github_pull_request.state
     end
   end
 end

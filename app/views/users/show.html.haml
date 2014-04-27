@@ -27,9 +27,9 @@
     .tab_content{ id: tab, class: ('active' if index == 0) }
       - case view_type_by_tab[tab]
       - when :pullreq
-        = render 'pull_requests'
+        = render 'pull_requests', pull_requests: @user.public_send(tab)
       - when :repo
-        = render 'repositories', repositories: @user.send(tab)
+        = render 'repositories', repositories: @user.public_send(tab)
 
 - else
   %p

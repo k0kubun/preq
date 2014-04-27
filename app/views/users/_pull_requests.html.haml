@@ -7,15 +7,15 @@
         Title
 
   %tbody
-    - [].each do |pr|
+    - pull_requests.each do |pull_request|
       %tr
         %td
-          = link_to '#' do
-            #{'owner'}/
-            %strong
-              = 'name'
+          = link_to pull_request.repository.url do
+            #{pull_request.repository.owner}/
+            %strong><
+              = pull_request.repository.name
         %td
-          = link_to '#' do
-            = 'title'
+          = link_to pull_request.url do
+            = pull_request.title
           %span.pull-right
-            = "##{'number'}"
+            = "##{pull_request.number}"
