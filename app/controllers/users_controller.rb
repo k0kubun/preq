@@ -38,6 +38,8 @@ class UsersController < ApplicationController
       closed_pull_requests = @login_user.github_client.pull_requests(repository.full_name, state: 'closed')
 
       (open_pull_requests + closed_pull_requests).each do |github_pull_request|
+        next if github_pull_request.user.try(:login) != @user.login
+
         pull_request = PullRequest.where(
           repository_id: repository.id,
           number: github_pull_request.number,
