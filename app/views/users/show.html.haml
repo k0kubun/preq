@@ -34,8 +34,9 @@
 - else
   %p
     This user's data is not fetched yet.
-  %p
-    Please
-    = link_to new_session_path do
-      sign in
-    to load his data from Github.
+  - if @login_user.blank?
+    %p
+      Please
+      = link_to new_session_path do
+        sign in
+      to load his data from Github.
