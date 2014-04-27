@@ -20,7 +20,7 @@
         = link_to "##{tab}", class: 'tab_change' do
           #{tab.capitalize}
           %span.badge{ class: "badge-#{badge_by_tab[tab]}" }
-            0
+            = @user.public_send(tab).size
 
   - view_type_by_tab = { merged: :pullreq, open: :pullreq, closed: :pullreq, contributed: :repo }
   - tabs.each_with_index do |tab, index|

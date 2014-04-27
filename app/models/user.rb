@@ -2,7 +2,7 @@ class User < ActiveRecord::Base
   has_many :repositories
   has_many :pull_requests, through: :repositories
 
-  alias_method :contributed, :repositories
+  define_method :contributed, -> { repositories.contributed }
   define_method :merged, -> { pull_requests.merged }
   define_method :closed, -> { pull_requests.closed }
   define_method :open, -> { pull_requests.open }

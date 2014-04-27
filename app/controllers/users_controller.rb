@@ -51,6 +51,8 @@ class UsersController < ApplicationController
           url: github_pull_request.html_url,
         )
       end
+
+      repository.update(contributed: repository.pull_requests.present?)
     end
   end
 
